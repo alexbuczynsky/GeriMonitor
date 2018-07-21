@@ -1,0 +1,35 @@
+{
+  "name": "gerimonitor",
+  "version": "1.0.0",
+  "description": "to help nursing homes detect when their residents are getting up and risk injury when falling down.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexbuczynsky/GeriMonitor.git"
+  },
+  "author": "Alexander Buczynsky",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alexbuczynsky/GeriMonitor/issues"
+  },
+  "homepage": "https://github.com/alexbuczynsky/GeriMonitor#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "bootstrap": "^4.1.2",
+    "cookie-parser": "^1.4.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "jquery": "^3.3.1",
+    "moment": "^2.22.2",
+    "moment-timezone": "^0.5.21",
+    "morgan": "^1.9.0",
+    "request": "^2.87.0",
+    "sqlite3": "^4.0.2"
+  },
+  "devDependencies": {
+    "prettyjson": "^1.2.1"
+  }
+}
