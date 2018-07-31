@@ -1,0 +1,98 @@
+
+
+    <%- include('standard-resources/header.ejs') %>
+<body>
+    <!-- Left Panel -->
+    <%- include('panels/left-panel/left-panel.ejs') %>
+    <!-- Left Panel -->
+
+    <!-- Right Panel -->
+    <div id="right-panel" class="right-panel">
+
+        <!-- Header-->
+        <%- include('panels/right-panel/header.ejs') %>
+        <!-- Header-->
+
+        <%- include('panels/right-panel/breadcrumbs.ejs',{pageName:'All Cameras'}) %>
+        <% cameras.forEach(camera => { %>
+        <div class="col-lg-6">
+            <aside class="profile-nav alt">
+                <section class="card">
+                    <div class="card-header user-header alt bg-dark">
+                        <div class="media">
+                            <a href="#">
+                                <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="images/cameraIcon.png">
+                            </a>
+                            <div class="media-body">
+                                <h2 class="text-light display-6"><%= camera.name %></h2>
+                                <p><%= camera.ip_address %>:<%= camera.port %></p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <a href="/events">
+                                <i class="fa fa-bell-o"></i> Motion Events
+                                <span class="badge badge-danger pull-right">
+                                    <%= camera.events.length %>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="/zones">
+                                <i class="fa fa fa-th"></i> Number of Zones
+                                <span class="badge badge-primary pull-right">
+                                    <%= camera.zones.length %>
+                                </span>
+                            </a>
+                            <ul class="list-group list-group-flush">
+                                <% camera.zones.forEach(zone => { %>
+                                    <li class="list-group-item">                                    
+                                    <% Object.keys(zone).forEach(key => { %> 
+                                        <%- key + ":" + zone[key] %> <br>
+                                    <%})%> 
+                                    </li>
+                                <% })%>
+                                
+                            </ul>
+                            
+                        </li>
+                    </ul>
+
+                </section>
+            </aside>
+        </div>
+        <% }) %>
+        
+
+
+        </div> <!-- .content -->
+    </div><!-- /#right-panel -->
+
+    <!-- Right Panel -->
+
+    <%- include('standard-resources/bodyScripts.ejs') %>
+    
+    <script>
+        ( function ( $ ) {
+            "use strict";
+
+            jQuery( '#vmap' ).vectorMap( {
+                map: 'world_en',
+                backgroundColor: null,
+                color: '#ffffff',
+                hoverOpacity: 0.7,
+                selectedColor: '#1de9b6',
+                enableZoom: true,
+                showTooltip: true,
+                values: sample_data,
+                scaleColors: [ '#1de9b6', '#03a9f5' ],
+                normalizeFunction: 'polynomial'
+            } );
+        } )( jQuery );
+    </script>
+
+</body>
+</html>

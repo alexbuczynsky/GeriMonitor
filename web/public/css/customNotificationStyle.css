@@ -1,0 +1,41 @@
+[data-notify="container"][class*="alert-pastel-"] {
+  background-color: white;
+  box-shadow: 3px 3px 20px grey;
+  border-width: 0px;
+  border-left: 15px solid #fff06a;
+  color: #3c464b;
+  border-radius: 0px;
+  letter-spacing: 1px; }
+
+[data-notify="container"].alert-pastel-info {
+  border-left-color: #50bed7; }
+
+[data-notify="container"].alert-pastel-danger {
+  border-left-color: #af235f; }
+
+[data-notify="container"].alert-pastel-success {
+  border-left-color: #41aaaa; }
+
+[data-notify="container"].alert-pastel-warning {
+  border-left-color: #ffb900; }
+
+[data-notify="title"] {
+  color: #009999;
+  overflow-wrap: break-word;
+  display: block;
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 5px; }
+
+[data-notify*="message"] {
+  font-weight: 400;
+  font-size: 12px;
+  display: block;
+  overflow-wrap: break-word; }
+
+[data-notify*="icon"] {
+  max-height: 64px; }
+
+.nopadding {
+  padding: 0 !important;
+  margin: 0 !important; }
