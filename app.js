@@ -21,8 +21,8 @@ Object.keys(publicPaths).forEach(publicPath =>{
 
 app.use(express.static('public'));
 
-var morgan = require('morgan'); //web request logging
-app.use(morgan('dev'))
+// var morgan = require('morgan'); //web request logging
+// app.use(morgan('dev'));
 
 app.set('view engine','ejs');
 app.set('views', __dirname + '/app/views');
@@ -54,8 +54,67 @@ server.listen(3000, function(){
   console.log('Example app listening on port 3000!');
 })
 
+var player = require('play-sound')(opts = {});
+try{
+  player.play('./app/models/alert_tones/notification.mp3', function(err){
+    if (err) throw err
+  })
+}catch(err){
+  console.log("When running on raspberry pi, go download Omxplayer to play media file notifications https://elinux.org/Omxplayer")
+}
+
+
 //Start sync with cameras
-require('./app/models/test_camera')
+var test_camera = require('./app/models/test_camera');
+
+var DB_API = require('./app/databases/db_api/db_api')
+
+
+try {
+  const Gpio = require('onoff').Gpio;
+  const buzzer = new Gpio(17, 'out');
+  setInterval(()=> {
+    buzzer.writeSync(1);
+    setTimeout(()=>{
+      buzzer.writeSync(0);
+    },1000);
+  },5000)
+}catch(err){
+  //console.log(err)
+}
+
+
+
+setInterval(() => {
+  test_camera.cameras.forEach(camObj => {
+
+    camObj.getMotionDetectionSettings().then(MotionDetectWindows => {
+      camObj.settings.motion.forEach(zone => {
+        const zoneOptions = {
+          zone_id: zone.Id,
+          camera_id: camObj.camera_id,
+          name: zone.Name,
+          x1: zone.Window[0],
+          y1: zone.Window[1],
+          x2: zone.Window[2],
+          y2: zone.Window[3],
+          threshold: zone.Threshold,
+          sensitive: zone.Sensitive
+        };
+        DB_API.zones.add(zoneOptions)
+      })
+      // console.log('Dejitter', camObj.settings.EventHandler.Dejitter);
+      // camObj.setEventHandlerConfig([{
+      //   name: 'Dejitter',
+      //   value: 0
+      // }])
+
+      // camObj.getEventHandlerConfig([]).then(info => {
+      //   console.log(info)
+      // })
+    })
+  })
+}, 30*1000)
 
 
 

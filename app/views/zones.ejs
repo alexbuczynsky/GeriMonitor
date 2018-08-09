@@ -1,0 +1,142 @@
+
+
+    <%- include('standard-resources/header.ejs') %>
+<body>
+    <!-- Left Panel -->
+    <%- include('panels/left-panel/left-panel.ejs') %>
+    <!-- Left Panel -->
+
+    <!-- Right Panel -->
+    <div id="right-panel" class="right-panel">
+
+        <!-- Header-->
+        <%- include('panels/right-panel/header.ejs') %>
+        <!-- Header-->
+
+        <%- include('panels/right-panel/breadcrumbs.ejs',{pageName:'All Zones'}) %>
+        <% zones.forEach(zone => { %>
+        <div class="col-lg-6">
+            <aside class="profile-nav alt">
+                <section class="card">
+                    <div class="card-header user-header alt bg-dark">
+                        <div class="media">
+                            <a href="#">
+                                <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="images/cameraIcon.png">
+                            </a>
+                            <div class="media-body">
+                                <h2 class="text-light display-6"><%= zone.name %></h2>
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="card-body card-block">
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="x1" class=" form-control-label">x1</label></div>
+                            <div class="col-12 col-md-9">
+                                <input type="number" id="x1" name="x1" value="<%= zone.x1 %>" class="form-control">
+                                <small class="form-text text-muted">This is a help text</small>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="y1" class=" form-control-label">y1</label></div>
+                            <div class="col-12 col-md-9">
+                                <input type="number" id="y1" name="y1" value="<%= zone.y1 %>" class="form-control">
+                                <small class="form-text text-muted">This is a help text</small>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="x2" class=" form-control-label">x2</label></div>
+                            <div class="col-12 col-md-9">
+                                <input type="number" id="x2" name="x2" value="<%= zone.x2 %>" class="form-control">
+                                <small class="form-text text-muted">This is a help text</small>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="y2" class=" form-control-label">y2</label></div>
+                            <div class="col-12 col-md-9">
+                                <input type="number" id="y2" name="y2" value="<%= zone.y2 %>" class="form-control">
+                                <small class="form-text text-muted">This is a help text</small>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="sensitivite" class=" form-control-label">Sensitivity</label></div>
+                            <div class="col-12 col-md-9">
+                                <input type="number" id="sensitivite" name="sensitivite" value="<%= zone.sensitive %>" class="form-control">
+                                <small class="form-text text-muted">This is a help text</small>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                                <div class="col col-md-3"><label for="threshold" class=" form-control-label">Threshold</label></div>
+                                <div class="col-12 col-md-9">
+                                    <input type="number" id="threshold" name="threshold" value="<%= zone.threshold %>" class="form-control">
+                                    <small class="form-text text-muted">This is a help text</small>
+                                </div>
+                            </div>
+                    </div>
+                    
+
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <a href="/events">
+                                <i class="fa fa-bell-o"></i> Motion Events
+                                <span class="badge badge-danger pull-right">
+                                    <%= zones.length %>
+                                </span>
+                            </a>
+                        </li>
+                        
+                        <li class="list-group-item">
+                            <a href="/zones">
+                                <i class="fa fa fa-th"></i> Number of Zones
+                                <span class="badge badge-primary pull-right">
+                                    <%= zones.length %>
+                                </span>
+                            </a>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">                                    
+                                <% Object.keys(zone).forEach(key => { %> 
+                                    <%- key + ":" + zone[key] %> <br>
+                                <%})%> 
+                                </li>
+                            </ul>
+                            
+                        </li>
+                    </ul>
+
+                </section>
+            </aside>
+        </div>
+        <% }) %>
+        
+
+
+        </div> <!-- .content -->
+    </div><!-- /#right-panel -->
+
+    <!-- Right Panel -->
+
+    <%- include('standard-resources/bodyScripts.ejs') %>
+    
+    <script>
+        ( function ( $ ) {
+            "use strict";
+
+            jQuery( '#vmap' ).vectorMap( {
+                map: 'world_en',
+                backgroundColor: null,
+                color: '#ffffff',
+                hoverOpacity: 0.7,
+                selectedColor: '#1de9b6',
+                enableZoom: true,
+                showTooltip: true,
+                values: sample_data,
+                scaleColors: [ '#1de9b6', '#03a9f5' ],
+                normalizeFunction: 'polynomial'
+            } );
+        } )( jQuery );
+    </script>
+
+</body>
+</html>

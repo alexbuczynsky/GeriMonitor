@@ -33,6 +33,10 @@ module.exports.users = { //Contains all device related functions
     // add: require('./db_api/devices/add'),
 };
 
+module.exports.snapshots = { //Contains all device related functions
+    add: require('./snapshots/add'),
+};
+
 module.exports.zones = {
     add: require('./zones/add'),
     getAll: require('./zones/getAll')

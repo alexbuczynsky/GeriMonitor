@@ -21,7 +21,7 @@ module.exports = async function getAll() {
 
 async function getDeviceEvents(camera){
   return new Promise(function(resolve,reject){
-    mainDB.all(`SELECT * FROM events WHERE camera_id = ${camera.camera_id}`,(err,events) => {
+    mainDB.all(`SELECT * FROM event_snapshots WHERE camera_id = ${camera.camera_id}`,(err,events) => {
       if (err) {
         console.error(new Error(err))
         return reject(err);

@@ -36,16 +36,24 @@
                     <thead>
                       <tr>
                         <% Object.keys(events[0]).forEach(headerName => { %> 
-                          <th><%= headerName %></th>
+                          <% if(!headerName.includes("file")){ %>
+                            <th><%= headerName %></th>
+                          <% } %>
                         <% }) %>
+                        <th>snapshot</th>
                       </tr>
                     </thead>
                     <tbody>
                       <% events.forEach(event => { %> 
                         <tr>
-                          <% Object.values(event).forEach(value => { %> 
-                            <td><%= value %></td>
-                          <% })%>
+                          <% Object.keys(events[0]).forEach(headerName => { %> 
+                            <% if(!headerName.includes("file")){ %>
+                              <td><%= event[headerName] %></td>
+                            <% } %>
+                          <% }) %>
+                          <td><a style="color: blue" href="/api/snapshots/<%= event.snapshot_file_name %>.<%= event.snapshot_file_extension %>" target="_blank">
+                            <img style="width:300px" src="/api/snapshots/<%= event.snapshot_file_name %>.<%= event.snapshot_file_extension %>">
+                          </a></td>
                         </tr>
                       <% }) %>
                     </tbody>

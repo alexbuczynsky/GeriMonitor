@@ -5,6 +5,7 @@ const propertyValueNameSeperator = DB_API.propertyValueNameSeperator;
 
 module.exports = function add(params) {
     return new Promise(function (resolve, reject) {
+        if (params.zone_id === undefined) reject(requireParamsRejection('zone_id'))
         if (params.camera_id === undefined) reject(requireParamsRejection('camera_id'))
         if (params.name === undefined) reject(requireParamsRejection('name'))
         if (params.x1 === undefined) reject(requireParamsRejection('x1'))

@@ -84,7 +84,7 @@ exports.startListening = function(server){
   //For talking to user interface when it needs info from server
   socketIO.sockets.on('connection',function(socket){
 
-    socket.on('getSerialPorts',function(cb){
+    socket.on('updateZone',function(params,cb){
       let SerialPort = require('serialport');
       SerialPort.list(function (err, ports) {
         if (err) {
@@ -94,5 +94,6 @@ exports.startListening = function(server){
         cb(ports);
       })
     })
+
   })
 }
