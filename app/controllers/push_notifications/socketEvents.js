@@ -127,7 +127,11 @@ exports.startListening = function (server) {
   function notification_sound() {
     try {
       var player = require('play-sound')(opts = {});
-      player.play(__dirname+'../../models/alert_tones/notification.mp3', function (err) {
+      const path = require('path');
+
+      const pathToMp3 = path.resolve(__dirname,'../../models/alert_tones/notification.mp3');
+      console.log(pathToMp3)
+      player.play(pathToMp3, function (err) {
         if (err) throw err
       })
     } catch (err) {
