@@ -4,6 +4,7 @@ This will be for monitoring the events
 
 const machine_states_class = require('../../models/machine_states');
 var push_events = require('../push_notifications/socketEvents.js').push_events;
+var moment = require('moment-timezone');
 
 const waitAfterSittingForAlarm = 5000;
 const waitSittingNoMotion = 5000;
