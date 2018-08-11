@@ -68,6 +68,10 @@ exports.startListening = function (server) {
     }))
   })
 
+  push_events.on('machine_states_motion_event', info => {
+    socketIO.emit('machine_states_motion_event', info)
+  })
+
   push_events.on('alarm_state', alarm_state => {
     let timeStamp = moment().tz("UTC").format('YYYY-MM-DD HH:mm:ss');
 

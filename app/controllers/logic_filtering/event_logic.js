@@ -7,11 +7,15 @@ var push_events = require('../push_notifications/socketEvents.js').push_events;
 var moment = require('moment-timezone');
 
 const waitAfterSittingForAlarm = 5000;
+var machine_states = {};
 const waitSittingNoMotion = 5000;
+module.exports.get_machine_states = function(){
+    return machine_states;
+}
 
 module.exports.start_listening = async function start_listening(){
 
-    var machine_states = new machine_states_class();
+    machine_states = new machine_states_class();
     await machine_states.init();
 
     var machine_states_events = machine_states.events.on("motion_event", info =>{
@@ -21,6 +25,7 @@ module.exports.start_listening = async function start_listening(){
                 tripped: bool
             }
         */
+       push_events.emit("machine_states_motion_event",info)
        switch(info.name){
            case "alarm":
                 push_events.emit("alarm_state",info.tripped);

@@ -8,7 +8,7 @@
 
         <div class="sufee-login d-flex align-content-center flex-wrap">
             <div class="container">
-                <div class="login-content" >
+                <div class="login-content" style="margin-top:0px;">
                     <div class="login-logo">
                         <a href="/admin" style="font-size:48px; color:white">
                             <small>Nurse View</small>
@@ -18,12 +18,24 @@
                         <form action="/login" method="post">
                             <div class="form-group">
                                 <label style="font-size:35px;">ALARM STATE</label>
-                                <button id="alarm_confirm" type="button" style="font-size:30px;height: 200px" class="btn btn-success">
+                                <button id="alarm_confirm" type="button" style="font-size:30px;height: 180px" class="btn btn-success">
                                     NO ALARM
                                 </button>
                             </div>
                         </form>
+                        <div>
+                            <small>machine states</small><br>
+                            <% machine_states.forEach(machine_state => {
+                                let badgeColor = "badge-danger";
+                                if(machine_state.tripped == true){
+                                    badgeColor = "badge-primary";
+                                } %>
+                                
+                                <span id="<%- machine_state.name%>" class="badge <%- badgeColor %>"><%= machine_state.name %></span>
+                            <% }) %>
+                        </div>
                     </div>
+                    
                 </div>
             </div>
         </div>
@@ -46,6 +58,22 @@
       }else{
           $("#alarm_confirm").removeClass("btn-danger").addClass("btn-success").text("No Alarms");;
       }
+    })
+
+    socketIO.on('machine_states_motion_event', info => {
+      console.log(info)
+      if(info.tripped == true){
+        $(`#${info.name}`).removeClass("badge-danger").addClass("badge-primary")
+      }else if(info.tripped == false){
+        $(`#${info.name}`).removeClass("badge-primary").addClass("badge-danger")
+      }
+      
+    //   info = JSON.parse(info);
+    //   if(info.alarm_state){ //if alarm is active
+    //       $("#alarm_confirm").removeClass("btn-success").addClass("btn-danger").text("Borys needs his Walker");
+    //   }else{
+    //       $("#alarm_confirm").removeClass("btn-danger").addClass("btn-success").text("No Alarms");;
+    //   }
     })
 
     $("#alarm_confirm").click(()=>{
