@@ -41,8 +41,8 @@ module.exports = class Camera {
     async findIPAddress(){
         var cameraObj = this;
         return new Promise((resolve,reject) => {
+            console.log("SCANNING FOR CAMERA...")
             netList.scanEach({}, (err, device) => {
-                console.log(device.mac,device.vendor)
                 if(device.mac == cameraObj.mac_address) {
                     this.ip_address = device.ip;
                     console.log('FOUND CAMERA!!', device.hostname,device.ip, device.vendor,device.mac)
