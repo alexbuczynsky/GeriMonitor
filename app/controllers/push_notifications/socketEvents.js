@@ -71,7 +71,7 @@ exports.startListening = function(server){
   push_events.on('alarm_state', alarm_state => {
     let timeStamp = moment().tz("UTC").format('YYYY-MM-DD HH:mm:ss');
 
-    if(alarm_state.alarm_state == true){
+    if(alarm_state == true){
       exports.alarm_interval = setInterval(() => {
         notification_sound()
       },2000)

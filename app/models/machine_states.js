@@ -28,7 +28,7 @@ module.exports = class machine_states {
     setState(name,state){
         //sets the state of the current in states array
         const index = this.states.findIndex(x => x.name == name);
-        this.states[index].setTripped(Boolean(state));
+        this.states[index].setTripped(state);
 
         this.events.emit("motion_event",{'name':name,'tripped':state});
     }
@@ -38,7 +38,7 @@ module.exports = class machine_states {
         let stateOfDesiredObject = null;
         currentStates.forEach(state => {
             if(name == state.name){
-                stateOfDesiredObject = Boolean(state.tripped);
+                stateOfDesiredObject = state.tripped;
             }
         })
         console.log(`state ${name}:${stateOfDesiredObject}`)
@@ -49,7 +49,7 @@ module.exports = class machine_states {
         let currentStates = this.states;
         let objectStates = {};
         currentStates.forEach(state => {
-            objectStates[state.name] = Boolean(state.tripped);
+            objectStates[state.name] = state.tripped;
         })
         return objectStates;    
     }
@@ -65,13 +65,13 @@ class machine_state {
     constructor(params) {
         this.id = params.state_id; //int
         this.name = params.state_name; //string
-        this.tripped = Boolean(params.tripped); //bool
+        this.tripped = params.tripped; //bool
         this.last_tripped_time = null; //datetime
         this._lastUpdate();
     }
 
     setTripped(trippedState){
-        this.tripped = Boolean(trippedState);
+        this.tripped = trippedState;
         this._lastUpdate();
     }
 
