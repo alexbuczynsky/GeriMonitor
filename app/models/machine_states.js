@@ -29,7 +29,7 @@ module.exports = class machine_states {
         //sets the state of the current in states array
         const index = this.states.findIndex(x => x.name == name);
         this.states[index] = state;
-        this.events.emit("motion_event",{'name':name,'tripped':state});
+        this.events.emit(`${moment().format("HH:mm:ss:sss")} - motion_event`,{'name':name,'tripped':state});
     }
 
     getState(name){
