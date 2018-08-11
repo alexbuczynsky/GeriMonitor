@@ -54,14 +54,13 @@ module.exports = class Camera {
                                 cameraFound = true;
                             }
                         })
-                    });
-
-                    if(cameraFound){
-                        console.log('FOUND CAMERA!!', device.hostname, device.ip, device.vendor, device.mac)
-                        return resolve(cameraObj)
-                    }else{
-                        setTimeout(scanAndFind(),2000)
-                    }
+                        if(cameraFound){
+                            console.log('FOUND CAMERA!!', device.hostname, device.ip, device.vendor, device.mac)
+                            return resolve(cameraObj)
+                        }else{
+                            setTimeout(scanAndFind(),2000)
+                        }
+                    });                    
                 }
             }catch(err){
                 reject(err);
