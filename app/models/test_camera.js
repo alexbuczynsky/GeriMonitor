@@ -97,12 +97,11 @@ DB_API.cameras.getAll()
 
         console.log(camObj.last_update,"motion was detected...")
         camObj.getLogs().then(allLogs => {
-            //console.log(allLogs) //removing for non-verbose logging (dev mode should enable this)
-            console.log('\n------- LOG EVENTS -------')
-            allLogs.forEach((log,ii) => {
-                console.log(`-- ${ii} time: ${log.info.time}\tzone: ${log.info.zone_name}\tstatus: ${log.info.status}`)
-            })
-            console.log('--------------------------\n')
+            // console.log('\n------- LOG EVENTS -------')
+            // allLogs.forEach((log,ii) => {
+            //     console.log(`-- ${ii} time: ${log.info.time}\tzone: ${log.info.zone_name}\tstatus: ${log.info.status}`)
+            // })
+            // console.log('--------------------------\n')
             allLogs.forEach(log => {
                 const t1 = moment(log.time,'YYYY-MM-DD HH:mm:ss');
                 const t2 = moment(log.info.time,'YYYY-MM-DD HH:mm:ss');

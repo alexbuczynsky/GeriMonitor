@@ -22,10 +22,10 @@ module.exports.start_listening = async function start_listening(){
         */
        switch(info.name){
            case "alarm":
-                push_events.emit("alarm_state",tripped);
+                push_events.emit("alarm_state",info.tripped);
                 break;
             default:
-                console.log(`setting machine state ${info.name} to ${info.value}`)
+                console.log(`setting machine state ${info.name} to ${info.tripped}`)
        }
     })
 
