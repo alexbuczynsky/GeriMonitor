@@ -29,6 +29,10 @@ module.exports.cameras = { //Contains all device related functions
     // modify: require('./db_api/devices/modify'),
 };
 
+module.exports.machine_states = { //Contains all machine state related functions
+    getAll: require('./machine_states/getAll')
+};
+
 module.exports.users = { //Contains all device related functions
     // add: require('./db_api/devices/add'),
 };

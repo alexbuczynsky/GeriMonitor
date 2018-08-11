@@ -16,8 +16,12 @@ DB_API.cameras.getAll()
                 port: camInfo.port,
                 username: camInfo.username,
                 password: camInfo.password,
+                mac_address: camInfo.mac_address,
+                vendor_name: camInfo.vendor_name
             })
-            resolve(testCam);
+            testCam.findIPAddress().then(() => {
+                resolve(testCam);
+            })
         })
     })
 })

@@ -67,7 +67,12 @@ try{
 //Start sync with cameras
 var test_camera = require('./app/models/test_camera');
 
-var DB_API = require('./app/databases/db_api/db_api')
+var DB_API = require('./app/databases/db_api/db_api');
+
+//start monitoring machine states
+require('./app/controllers/logic_filtering/event_logic').start_listening();
+
+
 
 
 try {

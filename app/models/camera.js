@@ -6,6 +6,8 @@ var fs = require('fs');
 
 var events = require('events');
 
+const netList = require('network-list');
+
 
 
 
@@ -19,6 +21,8 @@ module.exports = class Camera {
         this.port = obj.port || 80;
         this.position = new position();
         this.eventLog = [];
+        this.mac_address = obj.mac_address;
+        this.vendor_name = obj.vendor_name;
         this.settings = {
             'motion': null,
             'alarm': null,
@@ -32,6 +36,21 @@ module.exports = class Camera {
         this._events = new events.EventEmitter();
         this._lastUpdate();
         this.syncTime();
+    }
+
+    async findIPAddress(){
+        var cameraObj = this;
+        return new Promise((resolve,reject) => {
+            netList.scanEach({}, (err, device) => {
+                console.log(device.mac,device.vendor)
+                if(device.mac == cameraObj.mac_address) {
+                    this.ip_address = device.ip;
+                    console.log('FOUND CAMERA!!', device.hostname,device.ip, device.vendor,device.mac)
+                    resolve(cameraObj);
+                }
+            });
+        })
+        
     }
     // `${this.username}:${this.password}@${this.ip_address}:${this.port}`
     reboot() {
