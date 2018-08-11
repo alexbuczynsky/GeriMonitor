@@ -119,6 +119,7 @@ exports.startListening = function (server) {
 
     socket.on('alarm_confirmed_from_GUI', function () {
       push_events.emit('alarm_state', false);
+      push_events.emit('alarm_confirmed_from_GUI');
       console.log("alarm_confirmed_pushed")
     })
 

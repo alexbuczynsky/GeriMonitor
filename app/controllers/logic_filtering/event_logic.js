@@ -30,6 +30,10 @@ module.exports.start_listening = async function start_listening(){
        }
     })
 
+    push_events.on("alarm_confirmed_from_GUI",() => {
+        machine_states.setState("person_in_room",true);
+    })
+
     // ZONE 1
     push_events.on("motion Pillow", () => {
         setTimeout(() => {
