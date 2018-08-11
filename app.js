@@ -58,14 +58,8 @@ server.listen(3000, function(){
   console.log('Example app listening on port 3000!');
 })
 
-var player = require('play-sound')(opts = {});
-try{
-  player.play('./app/models/alert_tones/notification.mp3', function(err){
-    if (err) throw err
-  })
-}catch(err){
-  console.log("When running on raspberry pi, go download Omxplayer to play media file notifications https://elinux.org/Omxplayer")
-}
+
+
 
 
 //Start sync with cameras

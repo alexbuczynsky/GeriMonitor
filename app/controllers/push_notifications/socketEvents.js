@@ -8,6 +8,7 @@ var push_events = new EventEmitter();
 var DB_API = require(`../../databases/db_api/db_api`);
 
 module.exports.push_events = push_events;
+module.exports.alarm_interval = {};
 
 exports.startListening = function(server){
   var socketIO = require('socket.io')(server,{
@@ -69,6 +70,18 @@ exports.startListening = function(server){
 
   push_events.on('alarm_state', alarm_state => {
     let timeStamp = moment().tz("UTC").format('YYYY-MM-DD HH:mm:ss');
+
+    if(alarm_state.alarm_state == true){
+      exports.alarm_interval = setInterval(() => {
+        notification_sound()
+      },2000)
+    }else{
+      try{
+        clearInterval(exports.alarm_interval);
+      }catch(err){
+        console.log(Error(err))
+      }
+    }
     socketIO.emit('alarm_state',JSON.stringify({
       'timestamp': timeStamp,
       'alarm_state':alarm_state
@@ -109,4 +122,17 @@ exports.startListening = function(server){
     })
 
   })
+}
+
+
+
+function notification_sound(){
+  var player = require('play-sound')(opts = {});
+  try{
+    player.play('../../models/alert_tones/notification.mp3', function(err){
+      if (err) throw err
+    })
+  }catch(err){
+    //console.log("When running on raspberry pi, go download Omxplayer to play media file notifications https://elinux.org/Omxplayer")
+  }
 }
