@@ -40,7 +40,7 @@ module.exports = class machine_states {
                 stateOfDesiredObject = state.tripped;
             }
         })
-        console.log(`state ${name}:{stateOfDesiredObject}`)
+        console.log(`state ${name}:${stateOfDesiredObject}`)
         return stateOfDesiredObject;    
     }
 
