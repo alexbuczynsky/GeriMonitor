@@ -95,7 +95,7 @@ DB_API.cameras.getAll()
         - Save a snapshot and add it to the snapshot database
         */
 
-        console.log(camObj.last_update,"motion was detected...")
+        //console.log(camObj.last_update,"motion was detected...")
         camObj.getLogs().then(allLogs => {
             // console.log('\n------- LOG EVENTS -------')
             // allLogs.forEach((log,ii) => {
