@@ -28,11 +28,12 @@
             </div>
         </div>
 
-    <%- include('standard-resources/bodyScripts.ejs') %>
+    <%- include('standard-resources/bodyScripts.ejs',{noNotifications:true}) %>
 </body>
 </html>
 
 <script>
+    var socketIO = io();
     socketIO.on('disconnect', () => {
         $("#alarm_confirm").removeClass("btn-danger").addClass("btn-success").text("No Alarms");;
         waitForConnection();
