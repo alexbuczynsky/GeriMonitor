@@ -11,6 +11,7 @@ module.exports.push_events = push_events;
 module.exports.alarm_interval = {};
 
 exports.startListening = function (server) {
+  notification_sound()
   var socketIO = require('socket.io')(server, {
     'pingTimeout': 15000
   });
