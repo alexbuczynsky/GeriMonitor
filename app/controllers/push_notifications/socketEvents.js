@@ -67,6 +67,14 @@ exports.startListening = function(server){
     }))
   })
 
+  push_events.on('alarm_state', alarm_state => {
+    let timeStamp = moment().tz("UTC").format('YYYY-MM-DD HH:mm:ss');
+    socketIO.emit('alarm_state',JSON.stringify({
+      'timestamp': timeStamp,
+      'alarm_state':alarm_state
+    }))
+  })
+
 
 
   socketIO.on('requestDHCPdevices',() => {
@@ -93,6 +101,11 @@ exports.startListening = function(server){
         }
         cb(ports);
       })
+    })
+
+    socket.on('alarm_confirmed_from_GUI',function(){
+      push_events.emit('alarm_state',false);
+      console.log("alarm_confirmed_pushed")
     })
 
   })

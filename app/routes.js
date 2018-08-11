@@ -21,11 +21,13 @@ module.exports = function(app, passport) {
     var path = require('path');
 
     const routes = {
-        '/'                 : { type: 'GET' ,  securityLevel:  2,  path: 'app/controllers/views/index.js' },
+        '/'                 : { type: 'GET' ,  securityLevel:  2,  path: 'app/controllers/views/nurse_view.js' },
+        '/admin'            : { type: 'GET' ,  securityLevel:  2,  path: 'app/controllers/views/index.js' },
         '/events'           : { type: 'GET' ,  securityLevel:  2,  path: 'app/controllers/views/events.js' },
         '/cameras'          : { type: 'GET' ,  securityLevel:  2,  path: 'app/controllers/views/cameras.js' },
         '/zones'            : { type: 'GET' ,  securityLevel:  2,  path: 'app/controllers/views/zones.js' },
-        '/login'            : { type: 'GET' ,  securityLevel: -1,  path: 'app/controllers/views/login.js' }
+        '/login'            : { type: 'GET' ,  securityLevel: -1,  path: 'app/controllers/views/login.js' },
+        '/nurse_view'       : { type: 'GET' ,  securityLevel: -1,  path: 'app/controllers/views/nurse_view.js' }
     }
     
     const apiRoutes = {

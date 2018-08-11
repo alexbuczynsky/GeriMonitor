@@ -1,8 +1,12 @@
 var moment = require('moment-timezone');
 var DB_API = require('../databases/db_api/db_api');
+const EventEmitter = require('events').EventEmitter;
+
+
 module.exports = class machine_states {
     constructor() {
         this.states = [];
+        this.events = new EventEmitter();
         this._lastUpdate();
     }
 
@@ -19,6 +23,33 @@ module.exports = class machine_states {
             }
             
         });
+    }
+
+    setState(name,state){
+        //sets the state of the current in states array
+        const index = this.states.findIndex(x => x.name == name);
+        this.states[index] = state;
+        this.events.emit("motion_event",{'name':name,'tripped':state});
+    }
+
+    getState(name){
+        let currentStates = this.states;
+        let stateOfDesiredObject = null;
+        currentStates.forEach(state => {
+            if(name == state.name){
+                stateOfDesiredObject = state.tripped;
+            }
+        })
+        return stateOfDesiredObject;    
+    }
+
+    getAllStates(){
+        let currentStates = this.states;
+        let objectStates = {};
+        currentStates.forEach(state => {
+            objectStates[state.name] = state.tripped;
+        })
+        return objectStates;    
     }
     
     _lastUpdate(){

@@ -48,6 +48,10 @@ app.use(require(__dirname + '/app/routes.js')(app, passport));
 var socketEvents = require('./app/controllers/push_notifications/socketEvents');
 var server = require('http').createServer(app);
 socketEvents.startListening(server);
+// setInterval(() => {
+//   socketEvents.push_events.emit("alarm_state",true);
+//   setTimeout(() => socketEvents.push_events.emit("alarm_state",false),4000);
+// },5000)
 
 //START SERVER
 server.listen(3000, function(){
@@ -70,7 +74,8 @@ var test_camera = require('./app/models/test_camera');
 var DB_API = require('./app/databases/db_api/db_api');
 
 //start monitoring machine states
-require('./app/controllers/logic_filtering/event_logic').start_listening();
+var event_logic = require('./app/controllers/logic_filtering/event_logic');
+event_logic.start_listening();
 
 
 

@@ -116,6 +116,11 @@ DB_API.cameras.getAll()
                         DB_API.events.add(log.info).then(eventInfo => {
                             const event_id = eventInfo.event_id;
                             const timeStamp = t1;
+
+
+                            push_events.emit(`motion ${log.info.zone_name}`);
+                            
+
                             camObj.getVideoSnapshot().then(imgData => {
                                 DB_API.snapshots.add({
                                     camera_id : camObj.camera_id,

@@ -1,0 +1,49 @@
+<%- include('standard-resources/header.ejs') %>
+<style>
+    body{
+        overflow-y:hidden;
+    }
+</style>
+<body class="bg-dark">
+
+        <div class="sufee-login d-flex align-content-center flex-wrap">
+            <div class="container">
+                <div class="login-content" >
+                    <div class="login-logo">
+                        <a href="/admin" style="font-size:48px; color:white">
+                            <small>Nurse View</small>
+                        </a>
+                    </div>
+                    <div class="login-form">
+                        <form action="/login" method="post">
+                            <div class="form-group">
+                                <label style="font-size:35px;">ALARM STATE</label>
+                                <button id="alarm_confirm" type="button" style="font-size:30px;height: 200px" class="btn btn-success">
+                                    NO ALARM
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <%- include('standard-resources/bodyScripts.ejs') %>
+</body>
+</html>
+
+<script>
+    socketIO.on('alarm_state', info => {
+      console.log(info)
+      info = JSON.parse(info);
+      if(info.alarm_state){ //if alarm is active
+          $("#alarm_confirm").removeClass("btn-success").addClass("btn-danger").text("Borys needs his Walker");
+      }else{
+        $("#alarm_confirm").removeClass("btn-danger").addClass("btn-success").text("No Alarms");;
+      }
+    })
+
+    $("#alarm_confirm").click(()=>{
+        socketIO.emit("alarm_confirmed_from_GUI")
+    })
+</script>
