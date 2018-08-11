@@ -125,8 +125,8 @@ exports.startListening = function (server) {
   })
 
   function notification_sound() {
-    var player = require('play-sound')(opts = {});
     try {
+      var player = require('play-sound')(opts = {});
       player.play(__dirname+'../../models/alert_tones/notification.mp3', function (err) {
         if (err) throw err
       })
