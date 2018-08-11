@@ -52,10 +52,10 @@ module.exports = class Camera {
                             if(device.mac == cameraObj.mac_address) {
                                 cameraObj.ip_address = device.ip;
                                 cameraFound = true;
+                                console.log('FOUND CAMERA!!', device.hostname, device.ip, device.vendor, device.mac)
                             }
                         })
                         if(cameraFound){
-                            console.log('FOUND CAMERA!!', device.hostname, device.ip, device.vendor, device.mac)
                             return resolve(cameraObj)
                         }else{
                             setTimeout(scanAndFind(),2000)
