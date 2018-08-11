@@ -6,7 +6,7 @@ var fs = require('fs');
 
 var events = require('events');
 
-const netList = require('network-list');
+const netList = require('local-network-scanner');
 
 
 
@@ -42,18 +42,21 @@ module.exports = class Camera {
         var cameraObj = this;
         return new Promise((resolve,reject) => {
             console.log("SCANNING FOR CAMERA...")
-            netList.scanEach({}, (err, device) => {
-                try{
-                    if(device.mac == cameraObj.mac_address) {
-                        this.ip_address = device.ip;
-                        console.log('FOUND CAMERA!!', device.hostname,device.ip, device.vendor,device.mac)
-                        resolve(cameraObj);
-                    }
-                }catch(err){
-                    console.log(err);
-                }
-                
+            netList.scan(devices => {
+                console.log(devices);
             });
+            // netList.scanEach({}, (err, device) => {
+            //     try{
+            //         if(device.mac == cameraObj.mac_address) {
+            //             this.ip_address = device.ip;
+            //             console.log('FOUND CAMERA!!', device.hostname,device.ip, device.vendor,device.mac)
+            //             resolve(cameraObj);
+            //         }
+            //     }catch(err){
+            //         console.log(err);
+            //     }
+                
+            // });
         })
         
     }
