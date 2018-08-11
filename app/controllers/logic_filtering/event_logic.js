@@ -33,7 +33,7 @@ module.exports.start_listening = async function start_listening(){
     // ZONE 1
     push_events.on("motion Pillow", () => {
         setTimeout(() => {
-            const above_bed_motion = machine_states.states.filter(x => x.name == "above_bed_motion");
+            const above_bed_motion = machine_states.states.find(x => x.name == "above_bed_motion");
             console.log('above_bed_motion',above_bed_motion,'seconds',above_bed_motion.seconds_since_tripped)
             if(above_bed_motion.seconds_since_tripped() > waitSittingNoMotion){
                 machine_states.setState("sitting_detected",   false);
