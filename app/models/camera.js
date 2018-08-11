@@ -43,15 +43,26 @@ module.exports = class Camera {
         return new Promise((resolve,reject) => {
             console.log("SCANNING FOR CAMERA...")
             try{
-                netList.scan(devices => {
-                    devices.forEach(device => {
-                        if(device.mac == cameraObj.mac_address) {
-                            this.ip_address = device.ip;
-                            console.log('FOUND CAMERA!!', device.hostname, device.ip, device.vendor, device.mac)
-                            resolve(cameraObj);
-                        }
-                    })
-                });
+                let cameraFound = false;
+                scanAndFind();
+
+                function scanAndFind(){
+                    netList.scan(devices => {
+                        devices.forEach(device => {
+                            if(device.mac == cameraObj.mac_address) {
+                                this.ip_address = device.ip;
+                                cameraFound = true;
+                            }
+                        })
+                    });
+                }
+                
+                if(cameraFound == true){
+                    console.log('FOUND CAMERA!!', device.hostname, device.ip, device.vendor, device.mac)
+                    return resolve(cameraObj);
+                }else{
+                    scanAndFind()
+                }
             }catch(err){
                 reject(err);
             }
