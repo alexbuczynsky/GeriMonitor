@@ -65,7 +65,7 @@ class machine_state {
     constructor(params) {
         this.id = params.state_id; //int
         this.name = params.state_name; //string
-        this.tripped = params.tripped; //bool
+        this.tripped = Boolean(params.tripped); //bool
         this.last_tripped_time = null; //datetime
         this._lastUpdate();
     }
