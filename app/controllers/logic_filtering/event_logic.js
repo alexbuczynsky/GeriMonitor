@@ -47,10 +47,11 @@ module.exports.start_listening = async function start_listening(){
     // ZONE 2
     push_events.on("motion Above Bed", () => {
         machine_states.setState("above_bed_motion",true);
-        if(!machine_states.getState("person_in_room") || machine_states.getState("person_in_room") == false || machine_states.getState("person_in_room") == "false"){
+        if(machine_states.getState("person_in_room") == false || machine_states.getState("person_in_room") == "false"){
             machine_states.setState("sitting_detected", true);
             setTimeout(() => {
-                if(!machine_states.getState("person_in_room") || machine_states.getState("person_in_room") == false || machine_states.getState("person_in_room") == "false"){
+                if(machine_states.getState("person_in_room") == false || machine_states.getState("person_in_room") == "false"){
+                    console.log("WE HAVE ARRIVED!!!", machine_states.getState("alarm"))
                     machine_states.setState("alarm", true);
                 }
                 machine_states.setState("sitting_detected", false);
