@@ -73,9 +73,9 @@ class machine_state {
     setTripped(trippedState){
         DB_API.machine_states.set({
             state_name:this.name,
-            tripped:trippedState,
-            last_tripped_time: this._lastUpdate()
+            tripped:trippedState
         })
+        this._lastUpdate();
     }
 
     seconds_since_tripped(){
@@ -83,6 +83,6 @@ class machine_state {
     }
 
     _lastUpdate(){
-        this.last_tripped_time = moment().utc().format();
+        this.last_tripped_time = moment().utc();
     }
 }
