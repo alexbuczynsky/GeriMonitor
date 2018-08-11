@@ -133,6 +133,6 @@ function notification_sound(){
       if (err) throw err
     })
   }catch(err){
-    //console.log("When running on raspberry pi, go download Omxplayer to play media file notifications https://elinux.org/Omxplayer")
+    console.log(err)
   }
 }

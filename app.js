@@ -61,7 +61,6 @@ server.listen(3000, function(){
 
 
 
-
 //Start sync with cameras
 var test_camera = require('./app/models/test_camera');
 
