@@ -25,7 +25,7 @@ module.exports.start_listening = async function start_listening(){
                 push_events.emit("alarm_state",info.tripped);
                 break;
             default:
-                console.log(`setting machine state ${info.name} to ${info.tripped}`)
+                console.log(`${moment().format("HH:mm:ss:sss")} - setting machine state ${info.name} to ${info.tripped}`)
        }
     })
 
