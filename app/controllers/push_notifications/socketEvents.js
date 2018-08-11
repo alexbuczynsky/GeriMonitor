@@ -11,7 +11,6 @@ module.exports.push_events = push_events;
 module.exports.alarm_interval = {};
 
 exports.startListening = function (server) {
-  notification_sound()
   var socketIO = require('socket.io')(server, {
     'pingTimeout': 15000
   });
@@ -73,6 +72,7 @@ exports.startListening = function (server) {
     let timeStamp = moment().tz("UTC").format('YYYY-MM-DD HH:mm:ss');
 
     if (alarm_state == true) {
+      clearInterval(exports.alarm_interval);
       exports.alarm_interval = setInterval(() => {
         notification_sound()
       }, 2000)
@@ -130,7 +130,6 @@ exports.startListening = function (server) {
       const path = require('path');
 
       const pathToMp3 = path.resolve(__dirname,'../../models/alert_tones/notification.mp3');
-      console.log(pathToMp3)
       player.play(pathToMp3, function (err) {
         if (err) throw err
       })
