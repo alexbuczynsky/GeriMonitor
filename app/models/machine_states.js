@@ -80,6 +80,6 @@ class machine_state {
     }
 
     _lastUpdate(){
-        this.last_tripped_time = moment().utc();
+        this.last_tripped_time = moment().utc().format();
     }
 }

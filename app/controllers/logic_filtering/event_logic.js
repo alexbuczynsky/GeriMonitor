@@ -35,7 +35,7 @@ module.exports.start_listening = async function start_listening(){
         setTimeout(() => {
             const above_bed_motion = machine_states.states.filter(x => x.name == "above_bed_motion");
             console.log('above_bed_motion',above_bed_motion,'seconds',above_bed_motion.seconds_since_tripped)
-            if(above_bed_motion.seconds_since_tripped > waitSittingNoMotion){
+            if(above_bed_motion.seconds_since_tripped() > waitSittingNoMotion){
                 machine_states.setState("sitting_detected",   false);
                 machine_states.setState("alarm",              false);
                 machine_states.setState("person_in_room",     false);
