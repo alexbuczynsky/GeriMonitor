@@ -33,17 +33,28 @@
 </html>
 
 <script>
+    socketIO.on('disconnect', () => {
+        $("#alarm_confirm").removeClass("btn-danger").addClass("btn-success").text("No Alarms");;
+        waitForConnection();
+    })
     socketIO.on('alarm_state', info => {
       console.log(info)
       info = JSON.parse(info);
       if(info.alarm_state){ //if alarm is active
           $("#alarm_confirm").removeClass("btn-success").addClass("btn-danger").text("Borys needs his Walker");
       }else{
-        $("#alarm_confirm").removeClass("btn-danger").addClass("btn-success").text("No Alarms");;
+          $("#alarm_confirm").removeClass("btn-danger").addClass("btn-success").text("No Alarms");;
       }
     })
 
     $("#alarm_confirm").click(()=>{
         socketIO.emit("alarm_confirmed_from_GUI")
     })
+
+    var waitForConnection = function(){
+      socketIO.once('connect', () => {
+        console.log('connected!!')
+        location.reload();
+      })
+    }
 </script>
