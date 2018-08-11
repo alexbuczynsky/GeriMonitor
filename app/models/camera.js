@@ -50,7 +50,7 @@ module.exports = class Camera {
                     netList.scan(devices => {
                         devices.forEach(device => {
                             if(device.mac == cameraObj.mac_address) {
-                                this.ip_address = device.ip;
+                                cameraObj.ip_address = device.ip;
                                 cameraFound = true;
                             }
                         })
