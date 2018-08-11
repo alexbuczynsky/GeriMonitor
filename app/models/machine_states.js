@@ -28,7 +28,7 @@ module.exports = class machine_states {
     setState(name,state){
         //sets the state of the current in states array
         const index = this.states.findIndex(x => x.name == name);
-        this.states[index] = state;
+        this.states[index].tripped = state;
         this.events.emit("motion_event",{'name':name,'tripped':state});
     }
 

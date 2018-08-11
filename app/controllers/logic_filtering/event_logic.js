@@ -70,7 +70,7 @@ module.exports.start_listening = async function start_listening(){
     
     // ZONE 4
     push_events.on("motion Door", () => {
-        machine_states.setState("entry_motion",true);
+        machine_states.setState("entry_motion", true);
         
         if(!machine_states.getState("person_in_room")){
             // setTimeout(() => {
