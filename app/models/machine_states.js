@@ -71,10 +71,7 @@ class machine_state {
     }
 
     setTripped(trippedState){
-        DB_API.machine_states.set({
-            state_name:this.name,
-            tripped:trippedState
-        })
+        this.tripped = Boolean(trippedState);
         this._lastUpdate();
     }
 
