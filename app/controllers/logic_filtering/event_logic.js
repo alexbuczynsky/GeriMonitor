@@ -48,7 +48,7 @@ module.exports.start_listening = async function start_listening(){
         if(!machine_states.getState("person_in_room")){
             machine_states.setState("sitting_detected", true);
             setTimeout(() => {
-                if(!machine_states_states.getState("person_in_room")){
+                if(!machine_states.getState("person_in_room")){
                     machine_states.setState("alarm", true);
                 }
                 machine_states.setState("sitting_detected", false);
@@ -73,7 +73,7 @@ module.exports.start_listening = async function start_listening(){
         
         if(!machine_states.getState("person_in_room")){
             setTimeout(() => {
-                machine_states.setSTate("entry_motion",false);
+                machine_states.setState("entry_motion",false);
             }, 5000) 
         }
 
