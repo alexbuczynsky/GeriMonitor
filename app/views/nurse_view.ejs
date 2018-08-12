@@ -23,9 +23,22 @@
                                 </button>
                             </div>
                         </form>
+                        <hr>
                         <div>
-                            <small>machine states</small><br>
-                            <% machine_states.forEach(machine_state => {
+                            <small>machine blips</small><br>
+                            <% machine_states.filter(x => x.trigger_type == "blip").forEach(machine_state => {
+                                let badgeColor = "badge-danger";
+                                if(machine_state.tripped == true){
+                                    badgeColor = "badge-primary";
+                                } %>
+                                
+                                <span id="<%- machine_state.name%>" class="badge <%- badgeColor %>"><%= machine_state.name %></span>
+                            <% }) %>
+                        </div>
+                        <hr>
+                        <div>
+                            <small>machine blips</small><br>
+                            <% machine_states.filter(x => x.trigger_type == "latch").forEach(machine_state => {
                                 let badgeColor = "badge-danger";
                                 if(machine_state.tripped == true){
                                     badgeColor = "badge-primary";

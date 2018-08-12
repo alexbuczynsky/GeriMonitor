@@ -67,6 +67,7 @@ class machine_state {
         this.name = params.state_name; //string
         this.tripped = params.tripped; //bool
         this.last_tripped_time = null; //datetime
+        this.trigger_type = params.trigger_type;
         this._lastUpdate();
     }
 
