@@ -7,7 +7,7 @@
 <body class="bg-dark">
 
         <div class="sufee-login d-flex align-content-center flex-wrap">
-            <div class="container">
+            <div class="container" style="margin-right:10px;margin-left:10px;">
                 <div class="login-content" style="margin-top:0px;">
                     <div class="login-logo">
                         <a href="/admin" style="font-size:48px; color:white">
@@ -25,7 +25,7 @@
                         </form>
                         <hr>
                         <div>
-                            <small>machine blips</small><br>
+                            <small>BLIPS</small><br>
                             <% machine_states.filter(x => x.trigger_type == "blip").forEach(machine_state => {
                                 let badgeColor = "badge-danger";
                                 if(machine_state.tripped == true){
@@ -37,7 +37,7 @@
                         </div>
                         <hr>
                         <div>
-                            <small>machine blips</small><br>
+                            <small>TRIGGERS</small><br>
                             <% machine_states.filter(x => x.trigger_type == "latch").forEach(machine_state => {
                                 let badgeColor = "badge-danger";
                                 if(machine_state.tripped == true){
