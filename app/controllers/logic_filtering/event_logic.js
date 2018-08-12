@@ -42,45 +42,52 @@ module.exports.start_listening = async function start_listening(){
 
     // ZONE 1
     push_events.on("motion Pillow", () => {
-        machine_states.setState("pillow_instant",true); setTimeout(() => {machine_states.setState("pillow_instant",false)},5000);
-        setTimeout(() => {
-            const above_bed_motion = machine_states.states.find(x => x.name == "above_bed_motion");
-            // console.log('above_bed_motion',above_bed_motion,'seconds',above_bed_motion.seconds_since_tripped())
-            if(above_bed_motion.seconds_since_tripped()*1000 > waitSittingNoMotion){
-                machine_states.setState("sitting_detected",   false);
-                machine_states.setState("alarm",              false);
-                machine_states.setState("person_in_room",     false);
-                machine_states.setState("entry_motion",       false);
-            }
-        },waitSittingNoMotion)
+        if(machine_states.getState("pillow_instant").seconds_since_tripped() < 10){
+            machine_states.setState("pillow_instant",true); setTimeout(() => {machine_states.setState("pillow_instant",false)},5000);
+            setTimeout(() => {
+                const above_bed_motion = machine_states.states.find(x => x.name == "above_bed_motion");
+                // console.log('above_bed_motion',above_bed_motion,'seconds',above_bed_motion.seconds_since_tripped())
+                if(above_bed_motion.seconds_since_tripped()*1000 > waitSittingNoMotion){
+                    machine_states.setState("sitting_detected",   false);
+                    machine_states.setState("alarm",              false);
+                    machine_states.setState("person_in_room",     false);
+                    machine_states.setState("entry_motion",       false);
+                }
+            },waitSittingNoMotion)
+        }
     })
 
     // ZONE 2
     push_events.on("motion Above Bed", () => {
-        machine_states.setState("above_bed_motion",true); setTimeout(() => {machine_states.setState("above_bed_motion",false)},5000);
-        if(machine_states.getState("person_in_room") == false || machine_states.getState("person_in_room") == "false"){
-            machine_states.setState("sitting_detected", true);
-            setTimeout(() => {
-                if(machine_states.getState("person_in_room") == false || machine_states.getState("person_in_room") == "false"){
-                    console.log("WE HAVE ARRIVED!!!", machine_states.getState("alarm"))
-                    machine_states.setState("alarm", true);
-                }
-                machine_states.setState("sitting_detected", false);
-                machine_states.setState("above_bed_motion",false);
-            },waitAfterSittingForAlarm)
+        if(machine_states.getState("above_bed_motion").seconds_since_tripped() < 10){
+            machine_states.setState("above_bed_motion",true); setTimeout(() => {machine_states.setState("above_bed_motion",false)},5000);
+            if(machine_states.getState("person_in_room") == false || machine_states.getState("person_in_room") == "false"){
+                machine_states.setState("sitting_detected", true);
+                setTimeout(() => {
+                    if(machine_states.getState("person_in_room") == false || machine_states.getState("person_in_room") == "false"){
+                        console.log("WE HAVE ARRIVED!!!", machine_states.getState("alarm"))
+                        machine_states.setState("alarm", true);
+                    }
+                    machine_states.setState("sitting_detected", false);
+                    machine_states.setState("above_bed_motion",false);
+                },waitAfterSittingForAlarm)
+            }
         }
     })
 
     // ZONE 3
     push_events.on("motion Secondary", () => {
-        machine_states.setState("secondary_motion_instant",true); setTimeout(() =>{machine_states.setState("secondary_motion_instant",false)},5000);
-        // if(machine_states.getState("entry_motion")){
-        if(true){
-            machine_states.setState("person_in_room",   true);
-            machine_states.setState("entry_motion",     false);
-            machine_states.setState("sitting_detected", false);
-            machine_states.setState("alarm",            false);
+        if(machine_states.getState("secondary_motion_instant").seconds_since_tripped() < 10){
+            machine_states.setState("secondary_motion_instant",true); setTimeout(() =>{machine_states.setState("secondary_motion_instant",false)},5000);
+            // if(machine_states.getState("entry_motion")){
+            if(true){
+                machine_states.setState("person_in_room",   true);
+                machine_states.setState("entry_motion",     false);
+                machine_states.setState("sitting_detected", false);
+                machine_states.setState("alarm",            false);
+            }
         }
+        
     })
     
     // ZONE 4
