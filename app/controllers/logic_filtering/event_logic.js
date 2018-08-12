@@ -74,7 +74,8 @@ module.exports.start_listening = async function start_listening(){
     // ZONE 3
     push_events.on("motion Secondary", () => {
         machine_states.setState("secondary_motion_instant",true); setTimeout(() =>{machine_states.setState("secondary_motion_instant",false)},5000);
-        if(machine_states.getState("entry_motion")){
+        // if(machine_states.getState("entry_motion")){
+        if(true){
             machine_states.setState("person_in_room",   true);
             machine_states.setState("entry_motion",     false);
             machine_states.setState("sitting_detected", false);
