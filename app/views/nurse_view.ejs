@@ -47,7 +47,7 @@
 <script>
     var socketIO = io();
     socketIO.on('disconnect', () => {
-        $("#alarm_confirm").removeClass("btn-danger").addClass("btn-success").text("No Alarms");;
+        $("#alarm_confirm").removeClass("btn-danger").addClass("btn-warning").text("Connection Lost");
         waitForConnection();
     })
     socketIO.on('alarm_state', info => {
