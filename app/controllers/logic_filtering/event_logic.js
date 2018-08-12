@@ -91,7 +91,7 @@ module.exports.start_listening = async function start_listening(){
         if(!machine_states.getState("person_in_room")){
             setTimeout(() => {
                 machine_states.setState("entry_motion",false);
-            }, 5000)
+            }, 15000)
         }
 
 
