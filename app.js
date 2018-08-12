@@ -88,36 +88,36 @@ try {
 
 
 
-setInterval(() => {
-  test_camera.cameras.forEach(camObj => {
+// setInterval(() => {
+//   test_camera.cameras.forEach(camObj => {
 
-    camObj.getMotionDetectionSettings().then(MotionDetectWindows => {
-      camObj.settings.motion.forEach(zone => {
-        const zoneOptions = {
-          zone_id: zone.Id,
-          camera_id: camObj.camera_id,
-          name: zone.Name,
-          x1: zone.Window[0],
-          y1: zone.Window[1],
-          x2: zone.Window[2],
-          y2: zone.Window[3],
-          threshold: zone.Threshold,
-          sensitive: zone.Sensitive
-        };
-        DB_API.zones.add(zoneOptions)
-      })
-      // console.log('Dejitter', camObj.settings.EventHandler.Dejitter);
-      // camObj.setEventHandlerConfig([{
-      //   name: 'Dejitter',
-      //   value: 0
-      // }])
+//     camObj.getMotionDetectionSettings().then(MotionDetectWindows => {
+//       camObj.settings.motion.forEach(zone => {
+//         const zoneOptions = {
+//           zone_id: zone.Id,
+//           camera_id: camObj.camera_id,
+//           name: zone.Name,
+//           x1: zone.Window[0],
+//           y1: zone.Window[1],
+//           x2: zone.Window[2],
+//           y2: zone.Window[3],
+//           threshold: zone.Threshold,
+//           sensitive: zone.Sensitive
+//         };
+//         DB_API.zones.add(zoneOptions)
+//       })
+//       // console.log('Dejitter', camObj.settings.EventHandler.Dejitter);
+//       // camObj.setEventHandlerConfig([{
+//       //   name: 'Dejitter',
+//       //   value: 0
+//       // }])
 
-      // camObj.getEventHandlerConfig([]).then(info => {
-      //   console.log(info)
-      // })
-    })
-  })
-}, 30*1000)
+//       // camObj.getEventHandlerConfig([]).then(info => {
+//       //   console.log(info)
+//       // })
+//     })
+//   })
+// }, 30*1000)
 
 
 

@@ -120,20 +120,20 @@ DB_API.cameras.getAll()
                             push_events.emit(`motion ${log.info.zone_name}`);
                             
 
-                            // camObj.getVideoSnapshot().then(imgData => {
-                            //     DB_API.snapshots.add({
-                            //         camera_id : camObj.camera_id,
-                            //         event_id : event_id,
-                            //         time : timeStamp.format("YYYYMMDD-HHmmss")
-                            //     }).then(snapshot_info => {
-                            //         const fileName = snapshot_info.snapshot_file_name;
-                            //         const extension = snapshot_info.snapshot_file_extension;
-                            //         fs.writeFile(__dirname+'/snaps/'+`${fileName}.${extension}`, imgData, 'binary', function (err) { err ? console.error(err) : console.log('image received',moment().format('hh:mm:ss:sss'))})
-                            //     })
-                            // })
-                            // .catch(err => {
-                            //     console.log(err)
-                            // })
+                            camObj.getVideoSnapshot().then(imgData => {
+                                DB_API.snapshots.add({
+                                    camera_id : camObj.camera_id,
+                                    event_id : event_id,
+                                    time : timeStamp.format("YYYYMMDD-HHmmss")
+                                }).then(snapshot_info => {
+                                    const fileName = snapshot_info.snapshot_file_name;
+                                    const extension = snapshot_info.snapshot_file_extension;
+                                    fs.writeFile(__dirname+'/snaps/'+`${fileName}.${extension}`, imgData, 'binary', function (err) { err ? console.error(err) : console.log('image received',moment().format('hh:mm:ss:sss'))})
+                                })
+                            })
+                            .catch(err => {
+                                console.log(err)
+                            })
                         })
                         .catch(err => console.log(err,log.info))
 
