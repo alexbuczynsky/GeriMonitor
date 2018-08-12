@@ -42,9 +42,10 @@ module.exports.start_listening = async function start_listening(){
 
     // ZONE 1
     push_events.on("motion Pillow", () => {
+        machine_states.setState("pillow_instant",true); setTimeout(machine_states.setState("pillow_instant",false),2500);
         setTimeout(() => {
             const above_bed_motion = machine_states.states.find(x => x.name == "above_bed_motion");
-            console.log('above_bed_motion',above_bed_motion,'seconds',above_bed_motion.seconds_since_tripped())
+            // console.log('above_bed_motion',above_bed_motion,'seconds',above_bed_motion.seconds_since_tripped())
             if(above_bed_motion.seconds_since_tripped()*1000 > waitSittingNoMotion){
                 machine_states.setState("sitting_detected",   false);
                 machine_states.setState("alarm",              false);
@@ -56,7 +57,7 @@ module.exports.start_listening = async function start_listening(){
 
     // ZONE 2
     push_events.on("motion Above Bed", () => {
-        machine_states.setState("above_bed_motion",true);
+        machine_states.setState("above_bed_motion",true); setTimeout(machine_states.setState("above_bed_motion",false),2500);
         if(machine_states.getState("person_in_room") == false || machine_states.getState("person_in_room") == "false"){
             machine_states.setState("sitting_detected", true);
             setTimeout(() => {
@@ -72,6 +73,7 @@ module.exports.start_listening = async function start_listening(){
 
     // ZONE 3
     push_events.on("motion Secondary", () => {
+        machine_states.setState("secondary_motion_instant",true); setTimeout(machine_states.setState("secondary_motion_instant",false),2500);
         if(machine_states.getState("entry_motion")){
             machine_states.setState("person_in_room",   true);
             machine_states.setState("entry_motion",     false);
@@ -82,6 +84,7 @@ module.exports.start_listening = async function start_listening(){
     
     // ZONE 4
     push_events.on("motion Door", () => {
+        machine_states.setState("door_instant",true); setTimeout(machine_states.setState("door_instant",false),2500);
         machine_states.setState("entry_motion", true);
         //machine_states.setState("person_in_room",true);
         
