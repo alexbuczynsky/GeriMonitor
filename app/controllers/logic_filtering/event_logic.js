@@ -37,6 +37,7 @@ module.exports.start_listening = async function start_listening(){
 
     push_events.on("alarm_confirmed_from_GUI",() => {
         machine_states.setState("person_in_room",true);
+        machine_states.setState("alarm",false);
     })
 
     // ZONE 1
